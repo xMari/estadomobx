@@ -1,6 +1,7 @@
 import 'package:aula/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 
 class MyHomePage extends StatelessWidget {
   final controller = Controller();
@@ -15,12 +16,23 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            TextField(
+              decoration: InputDecoration(labelText: "Nome"),
+              onChanged: controller.mudarNome,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextField(
+              decoration: InputDecoration(labelText: "Sobrenome"),
+              onChanged: controller.mudarSobrenome,
+            ),
+            SizedBox(
+              height: 20,
+            ),
             Observer(
               builder: (_) {
-                return Text(
-                  '${controller.counter}',
-                  style: Theme.of(context).textTheme.headline4,
-                );
+                return Text('${controller.nomecompleto}');
               },
             ),
           ],
@@ -28,7 +40,7 @@ class MyHomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          controller.increment();
+          //  controller.increment();
         },
         child: Icon(Icons.add),
       ),
